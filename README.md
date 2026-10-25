@@ -28,3 +28,13 @@ An external ELF dependency in that report is not automatically missing: many
 libraries are built by Android. Conversely, ELF inventory does not prove symbol
 or namespace compatibility. Bluetooth, GNSS, audio, USB audio and DRM still
 require the tests documented in the device tree's `docs/HARDWARE_BRINGUP.md`.
+
+## Android 11 source-built library selection
+
+The recursive blob installation excludes `lib/libalsautils.so`. Android 11's
+`audio.usb.default` requires `profile_get_highest_sample_rate`, which the
+bundled old library does not export. That copy previously overwrote the
+source-built module, matching the linker error observed on the phone. The
+MTK primary audio HAL lists this dependency but imports none of its symbols.
+The original blob remains in the repository for provenance. USB playback and
+capture still require device testing after building the coherent image.
