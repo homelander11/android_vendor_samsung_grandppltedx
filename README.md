@@ -44,6 +44,14 @@ referenced `libdpframework.so`. Only the correct blob exports
 `ion_custom_ioctl`, which the device's graphics code calls. Both graphics
 prebuilts are packaged through their modules, excluding duplicate raw copies.
 
+The old `lib/libshim_gui.so` is also excluded from raw copying. It overwrote the
+device's source-built shim and lacks the old unsigned mapper-lock implementation
+needed by `hwcomposer.mt6735.so`. The first VM ROM consequently stayed at the
+Samsung logo while Android repeatedly waited for its display service. Pair this
+exclusion with the device's updated GUI shim/CallStack dependency. Before/after
+`dlopen(RTLD_NOW)` tests reproduce the original composer/camera errors and load
+both with the new shim; normal boot and hardware operation remain to be tested.
+
 ## Audio-filter calibration IDs
 
 `libaudiocompensationfilter_vendor.so` used NVRAM LIDs two entries higher than
