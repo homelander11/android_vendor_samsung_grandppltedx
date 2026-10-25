@@ -1,0 +1,29 @@
+{
+  "original_sha256": "5150222ba0218d4dcc51dc81f616e7f9dbe5de15122518c8a49b283b62b45237",
+  "patched_sha256": "d83f7a9ed24076fc5d953ec964f5b2e698c342a4ac8acd18980feae60fe36be0",
+  "size": 22196,
+  "dynamic_offset": 20040,
+  "dynamic_size": 280,
+  "removed_entry_offset": 20152,
+  "original_needed": [
+    "liblog.so",
+    "libsecril-client.so",
+    "libc++.so",
+    "libdl.so",
+    "libc.so",
+    "libm.so"
+  ],
+  "patched_needed": [
+    "liblog.so",
+    "libc++.so",
+    "libdl.so",
+    "libc.so",
+    "libm.so"
+  ],
+  "source_repository": "https://github.com/RodrigoAyuso/android_vendor_samsung_grandppltedx",
+  "source_revision": "d3a6207e911fd01ff898bb64ac5cd71740a68516",
+  "source_path": "proprietary/vendor/lib/hw/lights.mt6735.so",
+  "original_git_blob": "5a507f08f9dfbe7414c77a8ce7e2111b6bcbbafa",
+  "reason": "libsecril-client.so is not packaged; this HAL imports none of its functions and has no dlsym import. Only its DT_NEEDED entry is removed.",
+  "validation": "Dynamic driver load fails before removal, then succeeds. The Android 11 wrapper enumerates legacy light types 0..5 including BACKLIGHT without calling setLight."
+}

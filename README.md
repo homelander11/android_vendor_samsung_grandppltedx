@@ -1,5 +1,15 @@
 # Galaxy J2 Prime vendor snapshot — LineageOS 18.1
 
+The light driver has one scoped dependency correction, documented in
+`lights-dependency-provenance.json`: remove its unused DT_NEEDED entry for the
+missing `libsecril-client.so`. It imports no functions from that library and
+has no dynamic symbol lookup. The original fails to load; the corrected driver
+loads and Android 11's real HIDL wrapper enumerates a backlight. Code, symbols,
+headers and file size stay unchanged. `tools/fix_lights_dependency.py` verifies
+both exact hashes, applies idempotently and refuses unknown versions. Pair with
+the device's Light service/wrapper and narrow backlight access rule. No radio
+library or calibration is modified; normal boot/brightness testing is pending.
+
 The `lineage-18.1` baseline omitted `lib/hw/camera.mt6735.so` despite retaining
 the supporting camera libraries and advertising camera hardware. Restore that
 42,800-byte module from this same device repository's pinned `lineage-15.1`
