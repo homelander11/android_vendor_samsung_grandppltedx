@@ -38,3 +38,8 @@ source-built module, matching the linker error observed on the phone. The
 MTK primary audio HAL lists this dependency but imports none of its symbols.
 The original blob remains in the repository for provenance. USB playback and
 capture still require device testing after building the coherent image.
+
+The `libion_mtk` Soong module now references `libion_mtk.so`; it previously
+referenced `libdpframework.so`. Only the correct blob exports
+`ion_custom_ioctl`, which the device's graphics code calls. Both graphics
+prebuilts are packaged through their modules, excluding duplicate raw copies.

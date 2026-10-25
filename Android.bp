@@ -20,7 +20,7 @@ cc_prebuilt_library_shared {
 	},
 	target: {
 		android_arm: {
-			srcs: ["proprietary/vendor/lib/libdpframework.so"],
+			srcs: ["proprietary/vendor/lib/libion_mtk.so"],
 		},
 	},
 	check_elf_files: false,
