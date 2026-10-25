@@ -1,0 +1,16 @@
+{
+  "original_sha256": "9dea2246a148f6f60d0f3c9a69b7d9fe92da4a645abf7153c815ac73ead5befc",
+  "patched_sha256": "26810174325967eafe9a7292a3efb65c8700943d4189a1c37e08a52905c253cf",
+  "size": 131265,
+  "string_offset": 84903,
+  "string_slot_size": 22,
+  "old_path": "/data/misc/codec_sock",
+  "new_path": "/data/gps_mnl/codec",
+  "source_repository": "https://github.com/RodrigoAyuso/android_vendor_samsung_grandppltedx",
+  "source_revision": "d3a6207e911fd01ff898bb64ac5cd71740a68516",
+  "source_path": "proprietary/vendor/lib/hw/gps.default.so",
+  "original_git_blob": "3027839add42d897d65ccbb4d3d3650dc92d398c",
+  "reason": "The GPS-UID worker cannot bind a filesystem socket in system:misc /data/misc (1771). Its bind-error path exits before signaling initialization ready, blocking GNSS and system_server startup. /data/gps_mnl is already created 0771 gps:system.",
+  "scope": "Only one string slot changes, with NUL padding. No executable code, ELF headers, symbols, dependencies, file size, process UID, directory permissions or calibration contents change. No other bundled vendor file references codec_sock.",
+  "validation": "Watchdog and native stacks identify the wait. A static ARM syscall probe with GNSS UID/GID/groups reproduces old-parent bind EACCES and new-parent bind/unlink success in recovery (permissive SELinux). Normal boot, service responsiveness and satellite fixes require testing."
+}

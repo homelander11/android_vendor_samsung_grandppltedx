@@ -1,5 +1,25 @@
 # Galaxy J2 Prime vendor snapshot — LineageOS 18.1
 
+The GPS worker now binds its stream socket at `/data/gps_mnl/codec` in the
+existing GPS-owned directory. Its old `/data/misc/codec_sock` path cannot be
+created by the configured GPS UID/groups on Android 11. The legacy worker's
+bind-error path exits before signaling initialization ready, leaving GNSS and
+system_server startup waiting indefinitely. The latest boot watchdog/native
+stacks match that condition; an exact-UID socket probe reproduces EACCES in the
+old parent and success in the new parent.
+
+Only 14 bytes in one 22-byte string slot change; all executable code, ELF
+headers/symbols/dependencies, process credentials and directory modes stay
+identical. Calibration and normal MNL datagram paths are untouched. No other
+bundled vendor file references the old socket; external factory tools may need
+the new path. `gps-socket-provenance.json` records exact hashes/offset/source.
+`tools/fix_gps_socket.py LIBRARY --apply` reproduces the correction, accepts a
+repeat invocation and rejects unknown binaries. Pair with the matching device
+tree's existing GPS-owned directory/init configuration and
+`tools/validate_gnss_socket.py`. See device `docs/GNSS_BOOT_FIX.md` for the
+tested single-library recovery update. Normal boot, service responsiveness and
+satellite positioning still require device testing.
+
 The light driver has one scoped dependency correction, documented in
 `lights-dependency-provenance.json`: remove its unused DT_NEEDED entry for the
 missing `libsecril-client.so`. It imports no functions from that library and
@@ -8,7 +28,9 @@ loads and Android 11's real HIDL wrapper enumerates a backlight. Code, symbols,
 headers and file size stay unchanged. `tools/fix_lights_dependency.py` verifies
 both exact hashes, applies idempotently and refuses unknown versions. Pair with
 the device's Light service/wrapper and narrow backlight access rule. No radio
-library or calibration is modified; normal boot/brightness testing is pending.
+library or calibration is modified. After the user installed the Light update,
+fresh logs passed display initialization and reached the separate GNSS gate
+above; brightness range and suspend/resume testing remain pending.
 
 The `lineage-18.1` baseline omitted `lib/hw/camera.mt6735.so` despite retaining
 the supporting camera libraries and advertising camera hardware. Restore that
