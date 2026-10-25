@@ -13,6 +13,7 @@ import sys
 
 ORIGINAL = "5150222ba0218d4dcc51dc81f616e7f9dbe5de15122518c8a49b283b62b45237"
 PATCHED = "d83f7a9ed24076fc5d953ec964f5b2e698c342a4ac8acd18980feae60fe36be0"
+BRIGHTNESS_PATCHED = "9d2a8737e6ee146cdf7e74b0233fc38efd614d0a9e6d79832688a2cce2b81b75"
 DYNAMIC_START, DYNAMIC_SIZE, ENTRY = 20040, 280, 20152
 
 
@@ -21,7 +22,7 @@ def digest(data):
 
 
 def corrected(data):
-    if digest(data) == PATCHED:
+    if digest(data) in (PATCHED, BRIGHTNESS_PATCHED):
         return data
     if digest(data) != ORIGINAL:
         raise ValueError("unknown lights HAL SHA-256; refusing modification")
@@ -52,7 +53,7 @@ def main():
     except (OSError, ValueError) as error:
         print("FAIL:", error, file=sys.stderr)
         return 1
-    print("Corrected lights HAL verified:", PATCHED)
+    print("Corrected lights dependency verified:", digest(after))
     return 0
 
 

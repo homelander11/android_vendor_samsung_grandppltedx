@@ -1,0 +1,20 @@
+{
+  "base_sha256": "d83f7a9ed24076fc5d953ec964f5b2e698c342a4ac8acd18980feae60fe36be0",
+  "patched_sha256": "9d2a8737e6ee146cdf7e74b0233fc38efd614d0a9e6d79832688a2cce2b81b75",
+  "size": 22196,
+  "callback_address_thumb": "0x1665",
+  "instruction_file_offset": 5736,
+  "before": "0d68",
+  "after": "0d78",
+  "instruction_before": "ldr r5, [r1]",
+  "instruction_after": "ldrb r5, [r1]",
+  "changed_bytes_relative_to_base": 1,
+  "source_repository": "https://github.com/RodrigoAyuso/android_vendor_samsung_grandppltedx",
+  "source_revision": "d3a6207e911fd01ff898bb64ac5cd71740a68516",
+  "source_path": "proprietary/vendor/lib/hw/lights.mt6735.so",
+  "original_git_blob": "5a507f08f9dfbe7414c77a8ce7e2111b6bcbbafa",
+  "prerequisite": "lights-dependency-provenance.json describes the earlier unused RIL dependency removal. The brightness helper accepts the pristine original, that intermediate correction, or its own final output.",
+  "reason": "The existing BACKLIGHT callback writes signed packed ARGB (e.g. -7303024) directly to lcd-backlight/brightness. The kernel rejects it; screen resumes at brightness zero. Android 11 LightsService supplies grayscale 0xffBBBBBB; reading the low byte exactly recovers its 0..255 brightness.",
+  "scope": "Only the BACKLIGHT color-load instruction changes. All other code, ELF headers, symbols, dependencies and file size are unchanged relative to the dependency-fixed base. Nongray arbitrary backlight colors are outside this framework brightness contract; notification colors are unaffected.",
+  "validation": "All 256 grayscale levels decoded correctly. A temporary file-bind overlay and Light-service-only restart on the booted phone produced positive brightness and passed three sleep/wake cycles, with actual brightness restored at the 0.5-second checks. The user confirmed power/home wake works. Overlay detached afterward; persistent install/reboot still required."
+}

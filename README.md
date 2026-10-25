@@ -1,5 +1,14 @@
 # Galaxy J2 Prime vendor snapshot — LineageOS 18.1
 
+The Light driver's BACKLIGHT callback also wrote packed ARGB as signed
+brightness. Android 11 supplies grayscale `0xffBBBBBB`; the kernel rejected
+negative writes and left the resumed panel dark. A one-byte LDR-to-LDRB
+correction decodes all 256 framework levels, leaving other callbacks unchanged.
+Live brightness/three sleep-wake cycles pass; the user confirms power/home wake.
+The temporary test leaves installed firmware unchanged until the ZIP is
+installed. See `lights-brightness-provenance.json`, guarded
+`tools/fix_lights_brightness.py`, and device `docs/BACKLIGHT_WAKE_FIX.md`.
+
 The GPS worker now binds its stream socket at `/data/gps_mnl/codec` in the
 existing GPS-owned directory. Its old `/data/misc/codec_sock` path cannot be
 created by the configured GPS UID/groups on Android 11. The legacy worker's
@@ -17,8 +26,8 @@ the new path. `gps-socket-provenance.json` records exact hashes/offset/source.
 repeat invocation and rejects unknown binaries. Pair with the matching device
 tree's existing GPS-owned directory/init configuration and
 `tools/validate_gnss_socket.py`. See device `docs/GNSS_BOOT_FIX.md` for the
-tested single-library recovery update. Normal boot, service responsiveness and
-satellite positioning still require device testing.
+tested single-library recovery update. The user now confirms normal boot;
+satellite positioning and continued service responsiveness need testing.
 
 The light driver has one scoped dependency correction, documented in
 `lights-dependency-provenance.json`: remove its unused DT_NEEDED entry for the
