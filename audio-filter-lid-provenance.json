@@ -1,0 +1,32 @@
+{
+  "path": "proprietary/vendor/lib/libaudiocompensationfilter_vendor.so",
+  "source_repository": "https://github.com/RodrigoAyuso/android_vendor_samsung_grandppltedx",
+  "source_revision": "d3a6207e911fd01ff898bb64ac5cd71740a68516",
+  "original_sha256": "3684f5622010b2606c6c8d727ddc610fd0f29655f97c99830caf4b653382416d",
+  "patched_sha256": "039ca7a5641640eced8023ad02b17b420d79ea124b41031e878734741e6c7201",
+  "size": 19712,
+  "changed_byte_count": 8,
+  "nvram_table_sha256": "6b5844dd0a9fed78c16da81d83c9217f62797c711a01c6506a28dcf749308615",
+  "evidence": "Both getter/setter default to LID 53 (WIFI), whereas Audio_CompFlt is 51 in bundled g_akCFG_File_Custom; all table selections have the same +2 bias. Change only those constants. No calibration data is included or modified.",
+  "changes": [
+    {
+      "file_offset": 4302,
+      "before": "3521",
+      "after": "3321",
+      "purpose": "getter default LID 53 -> 51"
+    },
+    {
+      "file_offset": 4472,
+      "before": "3521",
+      "after": "3321",
+      "purpose": "setter default LID 53 -> 51"
+    },
+    {
+      "file_offset": 12976,
+      "before": "3e0000003500000044000000350000004500000046000000",
+      "after": "3c0000003300000042000000330000004300000044000000",
+      "purpose": "shared filter-type LID table: remove incorrect +2 bias"
+    }
+  ],
+  "original_git_blob": "4d5eb1bceff41269b24cc83fd950c0df9b3a9210"
+}

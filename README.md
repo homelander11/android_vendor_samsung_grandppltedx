@@ -8,7 +8,7 @@ for the 2026-10-25 audit.
 
 See `camera-blob-provenance.json` for the source revision, Git object hash,
 SHA-256, size, and direct ELF dependencies. No blob from a different device was
-introduced, and no existing vendor library or device calibration was replaced.
+introduced by the camera restoration, and no device calibration was replaced.
 The existing recursive `PRODUCT_COPY_FILES` rule installs the restored file.
 
 Static validation confirms an ARM ELF32 library with an `HMI` module export.
@@ -43,3 +43,33 @@ The `libion_mtk` Soong module now references `libion_mtk.so`; it previously
 referenced `libdpframework.so`. Only the correct blob exports
 `ion_custom_ioctl`, which the device's graphics code calls. Both graphics
 prebuilts are packaged through their modules, excluding duplicate raw copies.
+
+## Audio-filter calibration IDs
+
+`libaudiocompensationfilter_vendor.so` used NVRAM LIDs two entries higher than
+the bundled `libcustom_nvram.so` table. Its default getter/setter selected LID
+53 (`WIFI`, 512 bytes) instead of 51 (`Audio_CompFlt`, 1260 bytes). The installed
+phone logs the corresponding failed Wi-Fi-record access during audio-filter
+initialization and falls back to default filter parameters. The filter's six
+table selections have the same +2 bias.
+
+Eight constant bytes are corrected: the getter/setter defaults and the shared
+six-entry selection table. All seven filter types now resolve to the intended
+audio files with 1260-byte records. No file access permissions, calibration
+contents, record format, or DSP coefficients are changed. This corrects record
+selection; playback quality and persistence still require physical testing.
+
+`audio-filter-lid-provenance.json` records the original Git object, source
+revision, input/output SHA-256, exact byte preconditions and offsets. Reproduce
+or verify the patch with `python3 tools/fix_audio_filter_lids.py --apply` or
+`python3 tools/fix_audio_filter_lids.py`. The tool rejects unknown binaries.
+From the Android root, independently check both library/table contents with:
+
+```sh
+python3 device/samsung/grandppltedx/tools/validate_audio_nvram.py \
+  vendor/samsung/grandppltedx/proprietary/vendor
+```
+
+The checker rejects the original library because it selects the Wi-Fi record.
+The corrected library passes all seven file/type/size checks. Raw NVRAM data
+was never read or modified by this source correction.
