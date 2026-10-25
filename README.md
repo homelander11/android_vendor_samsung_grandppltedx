@@ -1,3 +1,30 @@
-# android_vendor_samsung_grandppltedx
-Samsung G532 Vendor for LineageOS 14.1 (Android 7 in general)
+# Galaxy J2 Prime vendor snapshot — LineageOS 18.1
 
+The `lineage-18.1` baseline omitted `lib/hw/camera.mt6735.so` despite retaining
+the supporting camera libraries and advertising camera hardware. Restore that
+42,800-byte module from this same device repository's pinned `lineage-15.1`
+revision. Its Git blob hash matches the module installed on the SM-G532G used
+for the 2026-10-25 audit.
+
+See `camera-blob-provenance.json` for the source revision, Git object hash,
+SHA-256, size, and direct ELF dependencies. No blob from a different device was
+introduced, and no existing vendor library or device calibration was replaced.
+The existing recursive `PRODUCT_COPY_FILES` rule installs the restored file.
+
+Static validation confirms an ARM ELF32 library with an `HMI` module export.
+This restores a missing prerequisite; camera preview/capture is **not yet
+verified**. Pair it with the device branch's camera provider service addition
+and validate the legacy camera/framework ABI on Android 11. The connected ROM
+reports zero cameras and lacks the provider service binary.
+
+From the project/Android root, using the matching device tree:
+
+```sh
+python device/samsung/grandppltedx/tools/audit_vendor.py \
+  vendor/samsung/grandppltedx/proprietary/vendor
+```
+
+An external ELF dependency in that report is not automatically missing: many
+libraries are built by Android. Conversely, ELF inventory does not prove symbol
+or namespace compatibility. Bluetooth, GNSS, audio, USB audio and DRM still
+require the tests documented in the device tree's `docs/HARDWARE_BRINGUP.md`.

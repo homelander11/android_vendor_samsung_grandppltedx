@@ -1,0 +1,30 @@
+{
+  "source_repository": "https://github.com/RodrigoAyuso/android_vendor_samsung_grandppltedx",
+  "source_revision": "d7d1ff06db5cf884b41f045cdb77103ed125e734",
+  "source_path": "proprietary/lib/hw/camera.mt6735.so",
+  "destination_path": "proprietary/vendor/lib/hw/camera.mt6735.so",
+  "git_blob_sha1": "3be82035136c86ced5f2fc09124942db84b2cf4a",
+  "sha256": "fab4dac6bdbb546a962347d56dff1880be22418c92d59cbbcda6713f2e3cdfc4",
+  "size": 42800,
+  "needed": [
+    "libui.so",
+    "libbinder.so",
+    "libgui.so",
+    "libdl.so",
+    "liblog.so",
+    "libutils.so",
+    "libcutils.so",
+    "libcamera_client.so",
+    "libmtkcamera_client.so",
+    "libcam_utils.so",
+    "libcam_hwutils.so",
+    "libcam.metadataprovider.so",
+    "libcam.halsensor.so",
+    "libcam.hal3a.v3.so",
+    "libmmsdkservice.so",
+    "libc++.so",
+    "libc.so",
+    "libm.so"
+  ],
+  "notes": "Restored missing module from the same device lineage-15.1 tree. Matches installed SM-G532G camera module by Git blob hash; runtime camera functionality still requires validation."
+}
