@@ -1,14 +1,15 @@
 {
   "path": "proprietary/vendor/lib/libmnl.so",
   "source_repository": "https://github.com/RodrigoAyuso/android_vendor_samsung_grandppltedx",
-  "source_revision": "d3a6207e911fd01ff898bb64ac5cd71740a68516",
-  "original_git_blob": "643e8b5a53e65ad040c59fb953c286c55fa93986",
-  "original_sha256": "a92487438cc305e2fa47f2ebd5c4cf80ec26a5fe7b1582ed9277435bd1682d80",
-  "patched_sha256": "84c2d44e51d6d0c43083175847cc624a6347f54e591b34ea0546d4cbc099f292",
+  "source_revision": "d7d1ff06db5cf884b41f045cdb77103ed125e734",
+  "original_git_blob": "1e53d7a210055ad46f5536419b2221288ef72ada",
+  "original_sha256": "ac117a9f9cf1810fecf9c5eea8454250d83251b52b2258fd0b5e040b4cf8a45f",
+  "patched_sha256": "f22229e1a67b858f5f875710d511ba514d4d36a6fa583aabd77bf2033b0dff65",
   "size": 2149272,
-  "changed_region_offset": 53306,
-  "before": "f8f728e9002814bf4ff0ff30002008bd00bf",
-  "after": "038801331b04f0d0f8f724e90028ecd108bd",
-  "evidence": "Observed mnld FORTIFY abort in libmnl.so at PC0xd03b from its mutex-destroy wrapper. Guard only Bionic destroyed state0xffff; reuse original -1 return path at0xd024. Normal destroy still calls original pthread_mutex_destroy. No global runtime-policy or calibration changes.",
-  "validation": "Exact Thumb code executed in isolated ARM process: original invalid call, guarded skip, normal destroy, repeat destroy, real-call error normalization and other valid index pass. Combined GPS service test and positioning remain pending; previous NMEA-only service trial was rolled back after a GNSS lookup watchdog."
+  "changed_region_offset": 53386,
+  "before": "f8f722e9002814bf4ff0ff30002008bd00bf",
+  "after": "038801331b04f0d0f8f71ee90028ecd108bd",
+  "evidence": "The 2016 engine aborted at PC0xd03b in its private mutex-destroy wrapper. The same wrapper remains in the same-device 2018 rollover engine at PC0xd08b. Guard only Bionic destroyed state0xffff; reuse original -1 return path at0xd074. Normal destruction calls original pthread_mutex_destroy at PLT0x52d0. No global runtime-policy or calibration changes.",
+  "validation": "Exact 2018 Thumb wrapper executed in isolated ARM process: original invalid call, guarded skip, normal destroy, repeated destroy, real-call error normalization and another valid index pass. With the temporary GNSS NMEA-copy adapter, two live app request stop/start cycles preserved both GPS processes and Android. A later outdoor trial reported one satellite via Android and GSV at12.8dB-Hz, zero used/no fixes, 353526ms elapsed and3532 NMEA callbacks, without GPS process or Android restart. Original GPS libraries were restored. Positioning, Location-setting toggles and cold boot remain unverified.",
+  "source_path": "proprietary/lib/libmnl.so"
 }

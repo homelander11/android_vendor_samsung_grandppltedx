@@ -5,11 +5,11 @@ import hashlib
 from pathlib import Path
 import sys
 
-ORIGINAL = "a92487438cc305e2fa47f2ebd5c4cf80ec26a5fe7b1582ed9277435bd1682d80"
-PATCHED = "84c2d44e51d6d0c43083175847cc624a6347f54e591b34ea0546d4cbc099f292"
-SIZE, OFFSET = 2149272, 53306
-BEFORE = bytes.fromhex("f8f728e9002814bf4ff0ff30002008bd00bf")
-AFTER = bytes.fromhex("038801331b04f0d0f8f724e90028ecd108bd")
+ORIGINAL = "ac117a9f9cf1810fecf9c5eea8454250d83251b52b2258fd0b5e040b4cf8a45f"
+PATCHED = "f22229e1a67b858f5f875710d511ba514d4d36a6fa583aabd77bf2033b0dff65"
+SIZE, OFFSET = 2149272, 53386
+BEFORE = bytes.fromhex("f8f722e9002814bf4ff0ff30002008bd00bf")
+AFTER = bytes.fromhex("038801331b04f0d0f8f71ee90028ecd108bd")
 
 
 def corrected(data):

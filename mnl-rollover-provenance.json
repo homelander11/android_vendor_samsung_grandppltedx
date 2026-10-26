@@ -1,0 +1,17 @@
+{
+  "path": "proprietary/vendor/lib/libmnl.so",
+  "source_repository": "https://github.com/RodrigoAyuso/android_vendor_samsung_grandppltedx",
+  "source_revision": "d7d1ff06db5cf884b41f045cdb77103ed125e734",
+  "source_path": "proprietary/lib/libmnl.so",
+  "source_git_blob": "1e53d7a210055ad46f5536419b2221288ef72ada",
+  "source_commit_title": "grandppltedx: gps: update libmnl to fix GPS week rollover",
+  "size": 2149272,
+  "previous_engine": "MNL_VER_16092301ALPS05_3.70_20",
+  "replacement_engine": "MNL_VER_18110801ALPS05_3.70_21",
+  "previous_unmodified_sha256": "a92487438cc305e2fa47f2ebd5c4cf80ec26a5fe7b1582ed9277435bd1682d80",
+  "previous_mutex_guarded_sha256": "84c2d44e51d6d0c43083175847cc624a6347f54e591b34ea0546d4cbc099f292",
+  "replacement_unmodified_sha256": "ac117a9f9cf1810fecf9c5eea8454250d83251b52b2258fd0b5e040b4cf8a45f",
+  "replacement_mutex_guarded_sha256": "f22229e1a67b858f5f875710d511ba514d4d36a6fa583aabd77bf2033b0dff65",
+  "local_transformation": "tools/fix_mnl_mutex.py; exactly the 18-byte region in mnl-mutex-provenance.json changes relative to the pinned replacement. This is a library update, not an 18-byte change relative to the older engine.",
+  "validation": "All 197 exports retained and all 20 MNL imports used by mnld available; isolated ARM mutex tests and two temporary live request cycles passed. Export compatibility does not establish private layout or hardware compatibility. A later outdoor trial reported one satellite via Android and GSV at12.8dB-Hz, zero used/no fixes, 353526ms elapsed and3532 NMEA callbacks, without GPS process or Android restart. Original GPS libraries were restored. Positioning, Location-setting toggles and cold boot still require testing. No persistent GPS update was installed on the phone."
+}

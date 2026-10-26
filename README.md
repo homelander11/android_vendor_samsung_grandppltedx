@@ -1,11 +1,21 @@
 # Galaxy J2 Prime vendor snapshot — LineageOS 18.1
 
-On `codex/gnss-compatibility-candidates`, `libmnl.so` has an experimental
-18-byte mutex-destroy guard. Its exact Thumb code passes isolated CPU tests;
-the combined GPS service/positioning test is still pending. A previous NMEA-only
-live test caused a GNSS lookup watchdog and was rolled back. See
-`mnl-mutex-provenance.json` and device `docs/GPS_POSITIONING_FOLLOWUP.md`.
-This candidate snapshot must not be presented as a verified GPS fix.
+On `codex/gnss-compatibility-candidates`, `libmnl.so` is the newer same-device
+week-rollover engine from upstream `lineage-15.1` commit
+`d7d1ff06db5cf884b41f045cdb77103ed125e734`, with an additional 18-byte
+mutex-destroy guard. Its 197 exports and the 20 MNL imports used by mnld match
+the earlier engine. The actual guard instructions pass isolated ARM CPU tests,
+and two temporary app request stop/start cycles preserve both GPS processes
+and Android with the GNSS NMEA-copy adapter. The outdoor trial reported one
+satellite at 12.8 dB-Hz, zero used and no position fix over a session exceeding
+353 seconds. Original GPS libraries were restored afterward. Positioning,
+Location-setting toggles and cold boot remain unverified. This is a full GPS
+library version update; the guard alone changes 18 bytes of that newer input.
+See `mnl-rollover-provenance.json`, `mnl-mutex-provenance.json` and device
+`docs/GPS_POSITIONING_FOLLOWUP.md` for source pins, exact hashes and test limits.
+The previous combined test using the older engine remained stable but returned
+zero satellites outdoors. A previous NMEA-only live test caused a GNSS lookup
+watchdog and was rolled back. This snapshot remains experimental.
 
 HD recording parameter/scene getters and setters now select the correct records
 in this snapshot's NVRAM table (63/64 instead of 65/66). The mismatched sizes
