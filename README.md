@@ -1,5 +1,12 @@
 # Galaxy J2 Prime vendor snapshot — LineageOS 18.1
 
+On `codex/gnss-compatibility-candidates`, `libmnl.so` has an experimental
+18-byte mutex-destroy guard. Its exact Thumb code passes isolated CPU tests;
+the combined GPS service/positioning test is still pending. A previous NMEA-only
+live test caused a GNSS lookup watchdog and was rolled back. See
+`mnl-mutex-provenance.json` and device `docs/GPS_POSITIONING_FOLLOWUP.md`.
+This candidate snapshot must not be presented as a verified GPS fix.
+
 HD recording parameter/scene getters and setters now select the correct records
 in this snapshot's NVRAM table (63/64 instead of 65/66). The mismatched sizes
 previously loaded DC calibration and a vibration-speaker filter as recording
