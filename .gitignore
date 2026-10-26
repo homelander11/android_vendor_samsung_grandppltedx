@@ -1,1 +1,3 @@
 /pending-rm
+__pycache__/
+*.py[cod]

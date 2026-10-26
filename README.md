@@ -1,5 +1,14 @@
 # Galaxy J2 Prime vendor snapshot — LineageOS 18.1
 
+HD recording parameter/scene getters and setters now select the correct records
+in this snapshot's NVRAM table (63/64 instead of 65/66). The mismatched sizes
+previously loaded DC calibration and a vibration-speaker filter as recording
+parameters. Only four instruction bytes change; calibration files are untouched.
+The user confirms a fresh foreground recording has a moving meter and audible
+voice with the correction loaded. Recovery installation/reboot and calls still
+need testing. See `recording-lid-provenance.json`, guarded
+`tools/fix_recording_lids.py`, and device `docs/MICROPHONE_RECORDING_FIX.md`.
+
 The Light driver's BACKLIGHT callback also wrote packed ARGB as signed
 brightness. Android 11 supplies grayscale `0xffBBBBBB`; the kernel rejected
 negative writes and left the resumed panel dark. A one-byte LDR-to-LDRB

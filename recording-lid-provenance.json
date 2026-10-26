@@ -1,0 +1,50 @@
+{
+  "path": "proprietary/vendor/lib/libaudiocustparam_vendor.so",
+  "source_repository": "https://github.com/RodrigoAyuso/android_vendor_samsung_grandppltedx",
+  "source_revision": "d3a6207e911fd01ff898bb64ac5cd71740a68516",
+  "original_git_blob": "550fbb83fa336032537464c094ab0ec9a2027689",
+  "original_sha256": "d4f20563caa3d8a8c1eaab2ea0bf853baf1056ab8f03306793c0210867dc3690",
+  "patched_sha256": "f3fb7b40768fe76339c02b198474a2f6dffb262350fbbba20995747baec5fe8e",
+  "size": 36292,
+  "changed_byte_count": 4,
+  "nvram_table_sha256": "6b5844dd0a9fed78c16da81d83c9217f62797c711a01c6506a28dcf749308615",
+  "evidence": "The paired HD recording getters/setters have the same +2 LID bias as the audio-filter library. LID65 is Audio_Buffer_DC_Calibration_Param (12 bytes), not Audio_Hd_Record_Param (LID63, 4054 bytes). LID66 is VibSpk_CompFlt (1260 bytes), not Audio_Hd_Record_Scene_Table (LID64, 135 bytes). Correct only these four constants. No device calibration is included or modified.",
+  "changes": [
+    {
+      "function": "GetHdRecordParamFromNV",
+      "instruction_offset": 13440,
+      "function_offset": 92,
+      "old_lid": 65,
+      "new_lid": 63,
+      "before": "4110a0e3",
+      "after": "3f10a0e3"
+    },
+    {
+      "function": "SetHdRecordParamToNV",
+      "instruction_offset": 13948,
+      "function_offset": 80,
+      "old_lid": 65,
+      "new_lid": 63,
+      "before": "4110a0e3",
+      "after": "3f10a0e3"
+    },
+    {
+      "function": "GetHdRecordSceneTableFromNV",
+      "instruction_offset": 14408,
+      "function_offset": 92,
+      "old_lid": 66,
+      "new_lid": 64,
+      "before": "4210a0e3",
+      "after": "4010a0e3"
+    },
+    {
+      "function": "SetHdRecordSceneTableToNV",
+      "instruction_offset": 14916,
+      "function_offset": 80,
+      "old_lid": 66,
+      "new_lid": 64,
+      "before": "4210a0e3",
+      "after": "4010a0e3"
+    }
+  ]
+}
