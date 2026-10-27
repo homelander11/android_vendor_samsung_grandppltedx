@@ -18,7 +18,7 @@
     "arm_selector_and_parser": "PASS all flags 0..15; ordinary PCM8 unchanged; isolated deep PCM24; unknown name -1",
     "live_kernel": "card0/device24 RUNNING; HAL logs successful pcm_open",
     "user": "PASS moving test pattern + tone, previously frozen clips, new rear/front video with sound, Camera reopen",
-    "persistent_install_and_reboot": "PENDING"
+    "persistent_install_and_reboot": "PASS: user installed combined update in TWRP and Android booted; corrected primary HAL hash verified after reboot. Extended audio-route testing pending."
   },
   "unchanged": [
     "executable sections",
