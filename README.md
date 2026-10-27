@@ -1,5 +1,16 @@
 # Galaxy J2 Prime vendor snapshot — LineageOS 18.1
 
+The primary audio HAL now uses this kernel's `MultiMedia2_PLayback` name for
+isolated deep-buffer playback. Its previous `Deep_Buffer_PLayback` name was
+absent, yielding PCM -1 and silent/frozen video playback. The same-length
+20-byte string replacement leaves executable code, ordinary output paths,
+microphone selectors and calibration unchanged. On-device logs confirm PCM
+device 24 opens and runs. The user confirms synthetic video/tone, previously
+frozen recordings, and fresh rear/front camera clips with sound and a successful
+Camera reopen. Permanent installation/reboot and other audio routes remain
+pending. See `audio-deep-buffer-provenance.json` and the matching device tree's
+`docs/AUDIO_DEEP_BUFFER_FIX.md` / `tools/fix_audio_deep_buffer.py`.
+
 HD recording parameter/scene getters and setters now select the correct records
 in this snapshot's NVRAM table (63/64 instead of 65/66). The mismatched sizes
 previously loaded DC calibration and a vibration-speaker filter as recording
