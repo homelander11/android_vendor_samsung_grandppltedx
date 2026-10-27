@@ -7,8 +7,10 @@ absent, yielding PCM -1 and silent/frozen video playback. The same-length
 microphone selectors and calibration unchanged. On-device logs confirm PCM
 device 24 opens and runs. The user confirms synthetic video/tone, previously
 frozen recordings, and fresh rear/front camera clips with sound and a successful
-Camera reopen. Permanent installation/reboot and other audio routes remain
-pending. See `audio-deep-buffer-provenance.json` and the matching device tree's
+Camera reopen. Permanent installation/reboot is verified; other audio routes
+remain pending. The matching device tree's helper also corrects video chroma
+ordering, and its colour update is user-confirmed working after reboot.
+See `audio-deep-buffer-provenance.json` and the matching device tree's
 `docs/AUDIO_DEEP_BUFFER_FIX.md` / `tools/fix_audio_deep_buffer.py`.
 
 HD recording parameter/scene getters and setters now select the correct records
