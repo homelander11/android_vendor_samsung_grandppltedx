@@ -154,9 +154,9 @@
   "validation": {
     "temporary_device_tests": "User confirms rear/front live preview and saved still photographs with the equivalent diagnostic dependency names.",
     "production_names": "Isolated RTLD_NOW of complete camera platform library passes with private libskic/ICU and libcamcx names. End-to-end production-name/reboot test pending.",
-    "video": "Raw-frame libcamcx candidate starts AVC/AAC recording and finalizes an MP4 with 509 video and 1481 audio frames. User picture/sound and front-camera video checks pending.",
+    "video": "First recording/playback/sound test passes. Subsequent front-video playback freezes with intermittent sound despite encoded AVC/AAC tracks; unresolved.",
     "normal_soong_build": "Not run; small locally cross-compiled helper passed ARM contract and live photo tests.",
     "full_rom_build": "Not run; no VPS needed.",
-    "stability": "A fresh diagnostic trial stalled after about four minutes and rolled back. No permanent camera release yet; repeated open/close and long-running tests pending."
+    "stability": "Reopen dialog observed in v20; v21 playback triggers MDP ION/blit errors and gralloc null-module cleanup crash. Original camera files restored; normal reboot recovers launcher. Release held. No gralloc changes activated."
   }
 }
