@@ -1,0 +1,22 @@
+{
+  "original_sha256": "1b8bb21c0673859e690191d68bf58af840a094df6fd6fdfb3ca738bf63f79532",
+  "patched_sha256": "970af7638d3e12d116c9171eae78a590ff9246169b30308ccfd2179cebb8c4cc",
+  "rva": 15470,
+  "offset": 15470,
+  "original": "fdf7c4ef",
+  "patched": "00f042b8",
+  "status": "Activated after isolated failure-path tests, TWRP installation, normal Android boot/display, and user-confirmed built-in preview/photo test",
+  "note": "Return after the existing module-lookup error log; valid-module cleanup and other flags are unchanged. Does not fix ION import/blit errors.",
+  "library": "proprietary/vendor/lib/hw/gralloc.mt6735.so",
+  "size": 51444,
+  "original_git_blob": "a116f6aa5d77ccb8cbc548afecdbb2adbd4b5efe",
+  "source_revision": "8850c97",
+  "reproducer": "device/samsung/grandppltedx/tools/fix_gralloc_unregister.py",
+  "validation": {
+    "arm_emulation": "PASS successful lookup, non-ION and munmap-error paths unchanged; failed lookup returns safely",
+    "isolated_native": "PASS on-device forced lookup failure",
+    "installer_fixture": "PASS install/reinstall/undo, metadata, unrelated files, unknown input/dependency and symlink rejection",
+    "persistent_device": "PASS exact guarded hash after TWRP installation/reboot; composer PID stable during normal use; built-in preview and photo user-confirmed",
+    "remaining": "Does not fix failed module lookup/import or third-party camera; wider media/Wi-Fi/wake regression testing remains pending"
+  }
+}

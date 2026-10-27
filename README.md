@@ -1,5 +1,14 @@
 # Galaxy J2 Prime vendor snapshot — LineageOS 18.1
 
+The graphics driver now returns safely when module lookup fails during buffer
+cleanup. Previously it logged that failure and dereferenced the null module,
+crashing the graphics composer. Only four instruction bytes change; successful
+cleanup is unchanged. ARM emulation, isolated on-device fault injection, recovery
+installation/reboot, normal display and built-in camera preview/photo checks
+pass. This does not fix the preceding module/import error or third-party camera
+compatibility. See `gralloc-unregister-provenance.json` and the device tree's
+`docs/GRALLOC_CRASH_GUARD.md`; wider hardware regression testing remains pending.
+
 The primary audio HAL now uses this kernel's `MultiMedia2_PLayback` name for
 isolated deep-buffer playback. Its previous `Deep_Buffer_PLayback` name was
 absent, yielding PCM -1 and silent/frozen video playback. The same-length
