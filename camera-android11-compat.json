@@ -157,6 +157,9 @@
     "video": "First recording/playback/sound test passes. Subsequent front-video playback freezes with intermittent sound despite encoded AVC/AAC tracks; unresolved.",
     "normal_soong_build": "Not run; small locally cross-compiled helper passed ARM contract and live photo tests.",
     "full_rom_build": "Not run; no VPS needed.",
-    "stability": "Reopen dialog observed in v20; v21 playback triggers MDP ION/blit errors and gralloc null-module cleanup crash. Original camera files restored; normal reboot recovers launcher. Release held. No gralloc changes activated."
+    "stability": "Reopen dialog observed in v20; v21 playback triggers MDP ION/blit errors and gralloc null-module cleanup crash. Original camera files restored; normal reboot recovers launcher. Release held. No gralloc changes activated.",
+    "file_analysis": "A failing saved clip has monotonic timestamps, 16 distinct byte-buffer-decoded frames and non-silent equal stereo channels without phase cancellation. Normal surface playback remains unresolved.",
+    "gpu_experiment": "Existing-clip playback passes once with GPU composition, but combined camera/GPU testing still fails; no GPU boot setting activated.",
+    "codec_experiment": "Temporary Codec2-disable trial selects OMX.google.h264.decoder; user playback result pending. Property restored automatically; no persistent codec setting."
   }
 }
